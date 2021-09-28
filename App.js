@@ -16,7 +16,7 @@ export default function App() {
           <Stack.Screen
             name="Pokemon"
             component={Pokemon}
-            options={{ title: 'Pokemon' }}
+            options={{ title: 'Pokemon List' }}
           />
           <Stack.Screen
             name="Profile"

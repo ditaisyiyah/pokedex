@@ -6,6 +6,7 @@ import {
   View,
   ScrollView,
   Pressable,
+  FlatList,
 } from 'react-native';
 import { SvgCssUri } from 'react-native-svg';
 import { Dimensions } from 'react-native';
@@ -37,18 +38,27 @@ export default function Pokemon({ navigation }) {
           {pokemons.map((pokemon, i) => {
             return (
               <View style={styles.card} key={i}>
-                <Text style={styles.name}>{pokemon.name}</Text>
-                <Pressable onPress={() => goDetail(i + 1)}>
-                  <SvgCssUri height="70%" width="100%" uri={pokemon.picture} />
-                </Pressable>
-                <View style={styles.typesContainer}>
-                  {pokemon.types.map((type, j) => {
-                    return (
-                      <Text style={styles.types} key={j}>
-                        {type}
-                      </Text>
-                    );
-                  })}
+                <Text style={styles.name}>{pokemon?.name}</Text>
+                <View style={styles.typesAndImage}>
+                  <View style={styles.typesContainer}>
+                    {pokemon?.types?.map((type, j) => {
+                      return (
+                        <View style={styles.typesShadow} key={j}>
+                          <Text style={styles.types}>{type}</Text>
+                        </View>
+                      );
+                    })}
+                  </View>
+                  <Pressable
+                    style={styles.image}
+                    onPress={() => goDetail(i + 1)}
+                  >
+                    <SvgCssUri
+                      height={windowHeight * 0.1}
+                      width="100%"
+                      uri={pokemon?.picture}
+                    />
+                  </Pressable>
                 </View>
               </View>
             );
@@ -62,47 +72,70 @@ export default function Pokemon({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f48800',
     alignItems: 'center',
     justifyContent: 'center',
+    width: windowWidth,
+    height: windowHeight,
   },
   title: {
+    color: 'yellow',
     fontSize: 40,
     fontWeight: 'bold',
     paddingVertical: 10,
+    height: '10%',
+    width: '100%',
+    paddingHorizontal: 20,
+    textAlignVertical: 'center',
   },
   cardContainer: {
-    flex: 1,
-    paddingHorizontal: 4,
     width: '100%',
-    backgroundColor: 'red',
+    height: '90%',
   },
   cardRow: {
-    width: '100%',
-    height: 'auto',
+    paddingVertical: 15,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-evenly',
   },
   card: {
-    backgroundColor: '#b0aa99',
+    backgroundColor: '#d87800',
     width: '44%',
-    height: '20%',
-    padding: 4,
-    marginVertical: 4,
+    height: '9%',
+    paddingHorizontal: 10,
+    marginVertical: 9,
     borderRadius: 15,
+    paddingVertical: 20,
   },
   name: {
-    paddingVertical: 10,
+    paddingBottom: 10,
     fontSize: 25,
     textAlign: 'center',
     fontWeight: 'bold',
-    color: '#e65481',
+    color: 'white',
+  },
+  typesAndImage: {
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
   },
   typesContainer: {
-    backgroundColor: 'blue',
+    width: '30%',
+    height: '50%',
   },
-  picture: {
-    backgroundColor: 'yellow',
+  typesShadow: {
+    width: '100%',
+    backgroundColor: 'purple',
+    borderRadius: 20,
+    padding: 2,
+    marginBottom: 1,
+  },
+  types: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 12,
+    textAlign: 'center',
+  },
+  image: {
+    width: '70%',
   },
 });
