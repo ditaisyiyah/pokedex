@@ -57,18 +57,16 @@ export function getPokemonCreator(pokedexAPI, id) {
           .join(''),
         types: types.map((el) => el.type.name),
         picture: sprites.other.dream_world.front_default,
-        about: {
-          Height: height + ' m',
-          Weight: weight + ' kg',
-          Abilities: abilities
-            .map((el) =>
-              el.ability.name
-                .split('')
-                .map((el, j) => (j == 0 ? el.toUpperCase() : el))
-                .join('')
-            )
-            .join(', '),
-        },
+        height: height + ' m',
+        weight: weight + ' kg',
+        abilities: abilities
+          .map((el) =>
+            el.ability.name
+              .split('')
+              .map((el, j) => (j == 0 ? el.toUpperCase() : el))
+              .join('')
+          )
+          .join(', '),
         baseStats: stats.map((el) => {
           return {
             name: el.stat.name

@@ -11,7 +11,7 @@ const windowHeight = Dimensions.get('window').height;
 
 const pokedexAPI = `https://pokeapi.co/api/v2/pokemon`;
 
-export default function Profile({ navigation, route }) {
+export default function Profile({ route }) {
   const { id } = route.params;
 
   const dispatch = useDispatch();
@@ -60,22 +60,16 @@ export default function Profile({ navigation, route }) {
               {menu == 'about' ? (
                 <>
                   <View style={styles.subMenu}>
-                    {Object.keys(pokemon?.about).map((el, i) => {
-                      return (
-                        <Text style={styles.subMenuText} key={i}>
-                          {el}
-                        </Text>
-                      );
-                    })}
+                    <Text style={styles.subMenuText}>Height</Text>
+                    <Text style={styles.subMenuText}>Weight</Text>
+                    <Text style={styles.subMenuText}>Abilities</Text>
                   </View>
                   <View style={styles.field}>
-                    {Object.values(pokemon?.about).map((el, j) => {
-                      return (
-                        <Text style={styles.fieldText} key={j}>
-                          : {el}
-                        </Text>
-                      );
-                    })}
+                    <Text style={styles.subMenuText}>: {pokemon.height}</Text>
+                    <Text style={styles.subMenuText}>: {pokemon.weight}</Text>
+                    <Text style={styles.subMenuText}>
+                      : {pokemon.abilities}
+                    </Text>
                   </View>
                 </>
               ) : menu == 'baseStats' ? (
